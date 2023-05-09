@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "Monofonto";
+  src: url('./assets/fonts/monofontorg.otf');
+}
+
+html {
+  font-family: 'Monofonto', monospace;
+  font-size: 10px;
+}
+
+body {
+  background-image: url('./assets/img/background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 2rem;
+  color: #2fc82e;
+}
