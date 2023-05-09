@@ -1,6 +1,11 @@
 @import './styles/constants';
+@import './styles//mixins';
+@import './libs/normalize';
 @import './styles/base';
 @import './styles/layout';
+@import './styles/header';
 
+@import './styles/button';
+@import './styles/field';
+@import './styles/difficulty';
 
-@import './libs/normalize';
