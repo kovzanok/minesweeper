@@ -102,3 +102,40 @@
 .mines-8 {
   color: rgb(98, 96, 96);
 }
+
+.light-theme {
+  .cell {
+    border: 2px solid $secondary-color-light;
+
+    &[status="hidden"] {
+      cursor: pointer;
+      background-color: $secondary-color-light;
+      @include media-hover {
+        &:hover {
+          border: 2px solid $primary-color-light;
+        }
+      }
+
+      &:active {
+        background-color: $primary-color-light;
+      }
+    }
+
+    &[status="opened"] {
+      background-color: $primary-color-light;
+    }
+
+    &[status="flag"] {
+      background-color: $secondary-color-light;
+      @include media-hover {
+        &:hover {
+          border: 2px solid $primary-color-light;
+        }
+      }
+
+      &:active {
+        background-color: $primary-color-light;
+      }
+    }
+  }
+}

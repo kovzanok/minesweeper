@@ -2,20 +2,20 @@ button {
   border: none;
   outline: none;
   background-color: transparent;
-  cursor: pointer;  
+  cursor: pointer;
 }
 
 .button {
   padding: 5px 10px;
   color: $primary-color;
-  &_control {    
+  &_control {
     border: 1px solid $primary-color;
-  }  
+  }
 
   &_active {
     border-bottom: 3px solid $primary-color;
   }
-  
+
   @include media-hover {
     &:hover {
       color: rgb(213, 206, 206);
@@ -25,5 +25,23 @@ button {
   &:active {
     background-color: $primary-color;
     color: black;
+  }
+}
+
+.light-theme {
+  .button {
+    color: $primary-color-light;
+    &_control {
+      border: 1px solid $primary-color-light;
+    }
+
+    &_active {
+      border-bottom: 3px solid $primary-color-light;
+    }
+
+    &:active {
+      background-color: $primary-color-light;
+      color: black;
+    }
   }
 }
