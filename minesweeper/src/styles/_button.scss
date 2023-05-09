@@ -1,0 +1,25 @@
+button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;  
+}
+
+.button {
+  padding: 5px 10px;
+  &_dark {
+    color: #2fc82e;
+    border: 1px solid $primary-color;
+  }  
+
+  @include media-hover {
+    &:hover {
+      color: rgb(213, 206, 206);
+    }
+  }
+
+  &:active {
+    background-color: $primary-color;
+    color: black;
+  }
+}
