@@ -1,0 +1,13 @@
+.difficulty-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.difficulty-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  column-gap: 20px;
+}
