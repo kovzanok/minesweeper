@@ -1,6 +1,6 @@
 .infos {
   display: grid;
-  grid-template-columns: 200px 200px;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas:
     "a a"
@@ -19,4 +19,13 @@
   &:nth-child(3) {
     grid-area: c;
   }
+}
+
+
+.controls {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  column-gap: 20px;
+  justify-content: space-between;
 }
