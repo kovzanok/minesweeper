@@ -32,7 +32,7 @@
   align-items: center;
   font-size: 3.5rem;
 
-  &[data-status="hidden"] {
+  &[status="hidden"] {
     cursor: pointer;
     background-color: $secondary-color;
     @include media-hover {
@@ -46,16 +46,16 @@
     }
   }
 
-  &[data-status="opened"] {
+  &[status="opened"] {
     background-color: $primary-color;
   }
 
-  &[data-status="bomb"] {
+  &[status="bomb"] {
     background-image: url("./assets/img/explosion.png");
     background-color: rgb(160, 18, 18);
   }
 
-  &[data-status="flag"] {
+  &[status="flag"] {
     cursor: pointer;
     background-image: url("./assets/img/flag.png");
     background-color: $secondary-color;
