@@ -9,14 +9,15 @@
   width: 800px;
 
   &_easy {
-    @include field($size: 8);
+    @include field($size: 10);
   }
 
   &_medium {
-    @include field($size: 16);
+    @include field($size: 15);
   }
 
   &_hard {
+    @include field($size: 25);
   }
 }
 

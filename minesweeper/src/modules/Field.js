@@ -9,11 +9,11 @@ export default class Field {
       case 'easy':
         return 10;
       case 'medium':
-        return 16;
+        return 15;
       case 'hard':
-        return 20;
+        return 25;
       default:
-        return 16;
+        return 15;
     }
   }
 
