@@ -62,8 +62,11 @@
         border: 2px solid $primary-color;
       }
     }
-    }
   }
+}
+
+.mines-hidden {
+  color: $secondary-color !important;
 }
 
 .mines-1 {
@@ -99,6 +102,10 @@
 }
 
 .light-theme {
+  .mines-hidden {
+    color: $secondary-color-light !important;
+  }
+
   .cell {
     border: 2px solid $secondary-color-light;
 
