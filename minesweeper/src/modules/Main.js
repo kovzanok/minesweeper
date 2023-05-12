@@ -1,19 +1,15 @@
 import Field from './Field';
-import DifficultyBlock from './DifficultyBlock';
 import Container from './Container';
 
 export default class Main {
-  static renderMain() {
+  static renderMain(difficulty, mines, savedGame) {
     const main = document.createElement('main');
     const container = Container.renderContainer();
 
-    const fieldInstance = new Field();
+    const fieldInstance = new Field(difficulty, mines, savedGame);
     const field = fieldInstance.renderField();
 
-    const difficultyBlockInstance = new DifficultyBlock();
-    const difficultyBlock = difficultyBlockInstance.renderDifficultiesBlock();
-
-    container.append(field, difficultyBlock);
+    container.append(field);
     main.append(container);
 
     return main;
