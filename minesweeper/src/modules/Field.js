@@ -212,4 +212,16 @@ export default class Field {
     };
     this.timerId = setInterval(tick, 1000);
   }
+
+  checkWin() {
+    const hiddenCellsCount = this.field.querySelectorAll(
+      '.cell[data-status="hidden"]',
+    ).length;
+    const minesCount = this.minesArray.length;
+    if (hiddenCellsCount === minesCount) {
+      this.isGameOver = true;
+      alert('Вы победили');
+      clearInterval(this.timerId);
+    }
+  }
 }
