@@ -1,5 +1,11 @@
+import clickSound from '../assets/mp3/click.mp3';
+import winSound from '../assets/mp3/win.mp3';
+import loseSound from '../assets/mp3/lose.mp3';
+
+import Controls from './Controls';
+
 export default class Field {
-  constructor(difficulty = 'hard', mines = 0, savedGame = []) {
+  constructor(difficulty = 'medium', mines = 0, savedGame = []) {
     this.difficulty = difficulty;
     this.mines = this.getMinesCount(mines);
     this.size = this.getSizeFromDifficulty();
@@ -120,9 +126,15 @@ export default class Field {
     clearInterval(this.timerId);
     this.minesArray.forEach((mineId) => {
       const bombCell = document.getElementById(mineId);
-      bombCell.dataset.status = 'bomb';
-      bombCell.classList.remove('mines-hidden');
+      if (bombCell) {
+        bombCell.dataset.status = 'bomb';
+        bombCell.classList.remove('mines-hidden');
+      }
     });
+    if (!Controls.isMuted) {
+      const lose = new Audio(loseSound);
+      lose.play();
+    }
   }
 
   handleFirstClick(cell) {
@@ -227,6 +239,10 @@ export default class Field {
     const movesCounter = document.getElementById('moves');
     const currentMoves = Number(movesCounter.textContent);
     movesCounter.textContent = currentMoves + 1;
+    if (!Controls.isMuted) {
+      const click = new Audio(clickSound);
+      click.play();
+    }
   }
 
   startTimer() {
@@ -249,6 +265,10 @@ export default class Field {
       this.isGameOver = true;
       // alert('Вы победили');
       clearInterval(this.timerId);
+      if (!Controls.isMuted) {
+        const win = new Audio(winSound);
+        win.play();
+      }
     }
   }
 }

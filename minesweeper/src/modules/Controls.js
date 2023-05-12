@@ -2,10 +2,19 @@ import { capitalize, getDifficultyFromFieldClass } from './utils';
 import NewGameModal from './NewGameModal';
 
 export default class Controls {
+  static isMuted = false;
+
   static renderControls() {
     const controls = document.createElement('ul');
     controls.className = 'controls';
-    const buttonArr = ['restart', 'save', 'top-10', 'toggle', 'new game'];
+    const buttonArr = [
+      'restart',
+      'save',
+      'top-10',
+      'toggle',
+      'new game',
+      'sound',
+    ];
 
     buttonArr.forEach((buttonAction) => {
       const control = Controls.renderControl(buttonAction);
@@ -15,6 +24,8 @@ export default class Controls {
         control.addEventListener('click', Controls.displayNewGameModal);
       } else if (buttonAction === 'restart') {
         control.addEventListener('click', Controls.restartGame);
+      } else if (buttonAction === 'sound') {
+        control.addEventListener('click', Controls.toggleSound);
       }
       controls.append(control);
     });
@@ -28,9 +39,13 @@ export default class Controls {
 
     const button = document.createElement('button');
     button.className = 'button button_control';
-    button.setAttribute('action', action);
-    button.textContent = capitalize(action);
+    button.setAttribute('data-action', action);
 
+    if (action === 'sound') {
+      button.textContent = `${capitalize(action)}: ${Controls.isMuted ? 'Off' : 'On'}`;
+    } else {
+      button.textContent = capitalize(action);
+    }
     control.append(button);
     return control;
   }
@@ -58,5 +73,11 @@ export default class Controls {
       detail: [difficulty, mines],
     });
     window.dispatchEvent(restartGameEvent);
+  }
+
+  static toggleSound() {
+    Controls.isMuted = !Controls.isMuted;
+    const soundButton = document.body.querySelector('[data-action="sound"]');
+    soundButton.textContent = `Sound: ${Controls.isMuted ? 'Off' : 'On'}`;
   }
 }
