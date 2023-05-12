@@ -6,6 +6,7 @@ export default class NewGameModal extends Modal {
     const modal = Modal.renderModal();
     const content = NewGameModal.renderContent();
     const button = NewGameModal.renderNewGameButton();
+    button.addEventListener('click', NewGameModal.startNewGame);
     modal.querySelector('.modal__body').append(content, button);
 
     return modal;
@@ -23,5 +24,20 @@ export default class NewGameModal extends Modal {
     button.className = 'button button_new-game';
     button.textContent = 'Start game';
     return button;
+  }
+
+  static startNewGame(e) {
+    const modalBody = e.target.closest('.modal__body');
+    const [difficulty, mines] = NewGameModal.getDataFromModalBody(modalBody);
+    const startNewGameEvent = new CustomEvent('newGame', {
+      detail: [difficulty, mines],
+    });
+    window.dispatchEvent(startNewGameEvent);
+  }
+
+  static getDataFromModalBody(modalBody) {
+    const { difficulty } = modalBody.querySelector('.button_active').dataset;
+    const mines = Number(modalBody.querySelector('input').value);
+    return [difficulty, mines];
   }
 }

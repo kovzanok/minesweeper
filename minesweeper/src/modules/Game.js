@@ -16,7 +16,17 @@ export default class Game {
     const main = Main.renderMain(this.difficulty, this.mines, this.savedGame);
     document.body.append(header, main);
     window.addEventListener('restart', Game.restartGame);
+    window.addEventListener('newGame', Game.startNewGame);
   }
 
   static restartGame() {}
+
+  static startNewGame(e) {
+    document.body.innerHTML = '';
+    const [difficulty, mines] = e.detail;
+    const headerInstance = new Header(mines, 0, 0);
+    const header = headerInstance.renderHeader();
+    const main = Main.renderMain(difficulty, mines);
+    document.body.append(header, main);
+  }
 }
