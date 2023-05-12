@@ -59,7 +59,8 @@ export default class Controls {
   }
 
   static toggleTheme() {
-    document.body.classList.toggle('light-theme');
+    const isLightTheme = document.body.classList.toggle('light-theme');
+    window.localStorage.setItem('isLightTheme', isLightTheme);
   }
 
   static displayNewGameModal() {

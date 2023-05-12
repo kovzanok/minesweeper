@@ -8,7 +8,9 @@ export default class App {
   }
 
   start() {
+    App.applyTheme();
     const game = new Game(this.mines, this.difficulty, this.savedGame);
+
     game.start();
   }
 
@@ -28,5 +30,12 @@ export default class App {
   static getMinesCount() {
     const mines = window.localStorage.getItem('minesCountValue');
     return mines;
+  }
+
+  static applyTheme() {
+    const isLightTheme = window.localStorage.getItem('isLightTheme') === 'true';
+    if (isLightTheme) {
+      document.body.classList.add('light-theme');
+    }
   }
 }
