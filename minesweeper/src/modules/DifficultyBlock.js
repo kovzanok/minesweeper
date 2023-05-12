@@ -12,7 +12,8 @@ export default class DifficultyBlock {
     block.append('Change difficulty:');
 
     const list = this.renderDifficultiesList();
-    block.append(list);
+    const input = DifficultyBlock.renderMinesNumberInput();
+    block.append(list, input);
 
     return block;
   }
@@ -43,5 +44,38 @@ export default class DifficultyBlock {
 
     listItem.append(button);
     return listItem;
+  }
+
+  static renderMinesNumberInput() {
+    const input = document.createElement('input');
+    input.className = 'mines-input';
+    input.id = 'mines';
+    input.type = 'number';
+    input.min = 1;
+    input.max = 99;
+    input.value = 10;
+
+    input.addEventListener('input', DifficultyBlock.validateNumberInput);
+    input.addEventListener('change', DifficultyBlock.insertMinValue);
+    const label = document.createElement('label');
+    label.for = 'mines';
+    label.textContent = 'Mines:';
+
+    label.append(input);
+    return label;
+  }
+
+  static validateNumberInput(e) {
+    const input = e.target;
+    if (input.value.length >= 3) {
+      input.value = input.value.slice(0, 2);
+    }
+  }
+
+  static insertMinValue(e) {
+    const input = e.target;
+    if (Number(input.value) <= 0) {
+      input.value = 1;
+    }
   }
 }
