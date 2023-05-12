@@ -27,7 +27,11 @@ export default class Infos {
     valueSpan.textContent = value;
     valueSpan.id = convertTextToId(text);
 
-    info.append(valueSpan);
+    if (text === 'Time') {
+      info.append(valueSpan, 's');
+    } else {
+      info.append(valueSpan);
+    }
     return info;
   }
 }

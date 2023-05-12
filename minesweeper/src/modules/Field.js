@@ -1,8 +1,10 @@
 import clickSound from '../assets/mp3/click.mp3';
 import winSound from '../assets/mp3/win.mp3';
 import loseSound from '../assets/mp3/lose.mp3';
+import MessageModal from './MessageModal';
 
 import Controls from './Controls';
+import { getTimeAndMoves } from './utils';
 
 export default class Field {
   constructor(difficulty = 'medium', mines = 0, savedGame = []) {
@@ -135,6 +137,10 @@ export default class Field {
       const lose = new Audio(loseSound);
       lose.play();
     }
+    const modal = MessageModal.render({
+      win: false,
+    });
+    document.body.append(modal);
   }
 
   handleFirstClick(cell) {
@@ -269,6 +275,13 @@ export default class Field {
         const win = new Audio(winSound);
         win.play();
       }
+      const [time, moves] = getTimeAndMoves();
+      const modal = MessageModal.render({
+        win: true,
+        time,
+        moves,
+      });
+      document.body.append(modal);
     }
   }
 }

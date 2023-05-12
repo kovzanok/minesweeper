@@ -11,3 +11,9 @@ export function getDifficultyFromFieldClass(fieldClassName) {
   if (fieldClassName.includes('medium')) return 'medium';
   return 'hard';
 }
+
+export function getTimeAndMoves() {
+  const time = document.getElementById('time').textContent;
+  const moves = document.getElementById('moves').textContent;
+  return [time, moves];
+}
