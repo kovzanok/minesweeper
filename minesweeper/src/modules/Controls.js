@@ -135,7 +135,7 @@ export default class Controls {
     if (!cells.every((cell) => cell.textContent === '')) {
       cells.forEach((cell) => {
         if (cell.dataset.status === 'flag') {
-          savedFieldObj.minesLeft -= 1;
+          savedFieldObj.minesLeft += 1;
         }
         savedFieldObj.cells.push({
           id: cell.id,

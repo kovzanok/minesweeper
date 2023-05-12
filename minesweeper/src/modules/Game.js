@@ -12,7 +12,7 @@ export default class Game {
 
   start() {
     const headerInstance = new Header(
-      this.mines - this.savedGame.minesLeft || 10,
+      Number(this.mines) - this.savedGame.minesLeft || 10,
       this.time,
       this.moves,
     );
