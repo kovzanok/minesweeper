@@ -1,15 +1,15 @@
 @font-face {
   font-family: "Monofonto";
-  src: url('./assets/fonts/monofontorg.otf');
+  src: url("./assets/fonts/monofontorg.otf");
 }
 
 html {
-  font-family: 'Monofonto', monospace;
+  font-family: "Monofonto", monospace;
   font-size: 10px;
 }
 
 body {
-  background-image: url('./assets/img/background.png');
+  background-image: url("./assets/img/background.png");
   background-repeat: no-repeat;
   background-size: cover;
   font-size: 2.5rem;
@@ -17,6 +17,23 @@ body {
 }
 
 .light-theme {
-  background-image: url('./assets/img/background-light.png');
+  background-image: url("./assets/img/background-light.png");
   color: $primary-color-light;
+  input[type="number"] {
+    background-color: $secondary-color-light;
+    color: $primary-color-light;
+  }
+}
+
+input[type="number"] {
+  background-color: $secondary-color;
+  color: $primary-color;
+  padding: 2px 5px;
+  text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

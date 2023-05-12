@@ -1,0 +1,33 @@
+.modal {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__body {
+  width: 35%;
+  height:240px;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: $secondary-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.light-theme {
+  .modal__body {
+
+    background-color: $secondary-color-light;
+    
+  }
+}

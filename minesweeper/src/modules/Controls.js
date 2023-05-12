@@ -1,4 +1,5 @@
 import { capitalize } from './utils';
+import NewGameModal from './NewGameModal';
 
 export default class Controls {
   static renderControls() {
@@ -10,6 +11,8 @@ export default class Controls {
       const control = Controls.renderControl(buttonAction);
       if (buttonAction === 'toggle') {
         control.addEventListener('click', Controls.toggleTheme);
+      } else if (buttonAction === 'new game') {
+        control.addEventListener('click', Controls.displayNewGameModal);
       }
       controls.append(control);
     });
@@ -32,5 +35,12 @@ export default class Controls {
 
   static toggleTheme() {
     document.body.classList.toggle('light-theme');
+  }
+
+  static displayNewGameModal() {
+    // const gameModalInstance = new NewGameModal();
+    const gameModal = NewGameModal.render();
+
+    document.body.append(gameModal);
   }
 }
