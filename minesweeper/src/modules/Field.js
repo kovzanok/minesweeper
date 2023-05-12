@@ -1,8 +1,22 @@
 export default class Field {
-  constructor(difficulty = 'medium') {
+  constructor(difficulty = 'hard', mines = 0, savedGame = []) {
     this.difficulty = difficulty;
+    this.mines = this.getMinesCount(mines);
     this.size = this.getSizeFromDifficulty();
+    this.savedGame = savedGame;
+    this.isGameOver = false;
+    this.isPause = false;
+    window.addEventListener('timerPause', this.pauseTimer);
+    window.addEventListener('timerGo', this.goTimer);
   }
+
+  pauseTimer = () => {
+    this.isPause = true;
+  };
+
+  goTimer = () => {
+    this.isPause = false;
+  };
 
   getSizeFromDifficulty() {
     switch (this.difficulty) {
@@ -64,7 +78,7 @@ export default class Field {
       cell.classList.remove('mines-hidden');
       this.isGameOver = true;
       this.openBombMines();
-      alert('Вы проиграли');
+      // alert('Вы проиграли');
       return undefined;
     }
     Field.addClick();
@@ -103,7 +117,6 @@ export default class Field {
   };
 
   openBombMines() {
-    console.log(this.timerId);
     clearInterval(this.timerId);
     this.minesArray.forEach((mineId) => {
       const bombCell = document.getElementById(mineId);
@@ -215,11 +228,14 @@ export default class Field {
     const currentMoves = Number(movesCounter.textContent);
     movesCounter.textContent = currentMoves + 1;
   }
+
   startTimer() {
     const time = document.getElementById('time');
     const tick = () => {
-      const timeValue = Number(time.textContent);
-      time.textContent = timeValue + 1;
+      if (!this.isPause) {
+        const timeValue = Number(time.textContent);
+        time.textContent = timeValue + 1;
+      }
     };
     this.timerId = setInterval(tick, 1000);
   }
@@ -231,7 +247,7 @@ export default class Field {
     const minesCount = this.minesArray.length;
     if (hiddenCellsCount === minesCount) {
       this.isGameOver = true;
-      alert('Вы победили');
+      // alert('Вы победили');
       clearInterval(this.timerId);
     }
   }
