@@ -50,13 +50,15 @@ export default class Game {
     const {
       time, mines, difficulty, moves,
     } = e.detail;
-    console.log(savedResults);
+
     if (savedResults.length >= 10) {
-      console.log('unshift');
       savedResults.shift();
     }
     savedResults.push({
-      time, mines, difficulty, moves,
+      time,
+      mines,
+      difficulty,
+      moves,
     });
     localStorage.setItem('savedResults', JSON.stringify(savedResults));
   }

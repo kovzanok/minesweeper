@@ -23,13 +23,11 @@
   align-items: center;
 }
 
-
 .light-theme {
   .modal__body {
-    background-color: $secondary-color-light;    
+    background-color: $secondary-color-light;
   }
 }
-
 
 .message-body {
   font-size: 3rem;
@@ -50,4 +48,29 @@
 .wrapper {
   display: flex;
   column-gap: 40px;
+}
+
+.modal-table {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+td {
+  text-align: center;
+  border: 1px solid $primary-color;
+}
+th {
+  font-weight: 400;
+  border: 1px solid $primary-color;
+}
+
+.light-theme {
+  td {
+    
+    border: 1px solid $primary-color-light;
+  }
+  th {
+    
+    border: 1px solid $primary-color-light;
+  }
 }

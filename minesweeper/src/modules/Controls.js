@@ -4,6 +4,7 @@ import {
   getTimeAndMoves,
 } from './utils';
 import NewGameModal from './NewGameModal';
+import ResultsModal from './ResultsModal';
 
 export default class Controls {
   static isMuted = false;
@@ -14,7 +15,7 @@ export default class Controls {
     const buttonArr = [
       'restart',
       'save',
-      'top-10',
+      'latest-10',
       'toggle',
       'new game',
       'sound',
@@ -32,6 +33,8 @@ export default class Controls {
         control.addEventListener('click', Controls.toggleSound);
       } else if (buttonAction === 'save') {
         control.addEventListener('click', Controls.saveGame);
+      } else if (buttonAction === 'latest-10') {
+        control.addEventListener('click', Controls.showResults);
       }
       controls.append(control);
     });
@@ -64,7 +67,6 @@ export default class Controls {
   }
 
   static displayNewGameModal() {
-    // const gameModalInstance = new NewGameModal();
     const gameModal = NewGameModal.render();
 
     document.body.append(gameModal);
@@ -145,5 +147,11 @@ export default class Controls {
       });
     }
     window.localStorage.setItem('saveGameObj', JSON.stringify(savedFieldObj));
+  }
+
+  static showResults() {
+    const resultModal = ResultsModal.render();
+
+    document.body.append(resultModal);
   }
 }
