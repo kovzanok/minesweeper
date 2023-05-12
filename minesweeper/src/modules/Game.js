@@ -11,10 +11,15 @@ export default class Game {
   }
 
   start() {
-    const headerInstance = new Header(this.time, this.moves);
+    const headerInstance = new Header(
+      this.mines - this.savedGame.minesLeft,
+      this.time,
+      this.moves,
+    );
     const header = headerInstance.renderHeader();
+    document.body.append(header);
     const main = Main.renderMain(this.difficulty, this.mines, this.savedGame);
-    document.body.append(header, main);
+    document.body.append(main);
     window.addEventListener('restart', Game.restartGame);
     window.addEventListener('newGame', Game.startNewGame);
   }

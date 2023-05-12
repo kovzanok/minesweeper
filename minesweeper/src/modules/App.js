@@ -13,7 +13,7 @@ export default class App {
   }
 
   static getGameFromLocalStorage() {
-    const savedGame = window.localStorage.getItem('saveGameArr');
+    const savedGame = window.localStorage.getItem('saveGameObj');
     if (savedGame) {
       return JSON.parse(savedGame);
     }

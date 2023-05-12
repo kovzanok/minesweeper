@@ -1,4 +1,8 @@
-import { capitalize, getDifficultyFromFieldClass } from './utils';
+import {
+  capitalize,
+  getDifficultyFromFieldClass,
+  getTimeAndMoves,
+} from './utils';
 import NewGameModal from './NewGameModal';
 
 export default class Controls {
@@ -26,6 +30,8 @@ export default class Controls {
         control.addEventListener('click', Controls.restartGame);
       } else if (buttonAction === 'sound') {
         control.addEventListener('click', Controls.toggleSound);
+      } else if (buttonAction === 'save') {
+        control.addEventListener('click', Controls.saveGame);
       }
       controls.append(control);
     });
@@ -42,7 +48,9 @@ export default class Controls {
     button.setAttribute('data-action', action);
 
     if (action === 'sound') {
-      button.textContent = `${capitalize(action)}: ${Controls.isMuted ? 'Off' : 'On'}`;
+      button.textContent = `${capitalize(action)}: ${
+        Controls.isMuted ? 'Off' : 'On'
+      }`;
     } else {
       button.textContent = capitalize(action);
     }
@@ -79,5 +87,55 @@ export default class Controls {
     Controls.isMuted = !Controls.isMuted;
     const soundButton = document.body.querySelector('[data-action="sound"]');
     soundButton.textContent = `Sound: ${Controls.isMuted ? 'Off' : 'On'}`;
+  }
+
+  static saveGame() {
+    Controls.saveDifficulty();
+    Controls.saveMines();
+    Controls.saveField();
+  }
+
+  static saveDifficulty() {
+    const field = document.getElementById('field');
+    const difficulty = getDifficultyFromFieldClass(field.classList.toString());
+    window.localStorage.setItem('difficultyValue', difficulty);
+  }
+
+  static saveMines() {
+    const field = document.getElementById('field');
+    const cells = Array.from(field.querySelectorAll('.cell'));
+    const mines = cells.reduce(
+      (sum, cell) => (cell.textContent === 'B' ? sum + 1 : sum + 0),
+      0,
+    ) || Number(document.getElementById('mines-left').textContent);
+    window.localStorage.setItem('minesCountValue', mines);
+  }
+
+  static saveField() {
+    const [time, moves] = getTimeAndMoves();
+    const savedFieldObj = {
+      cells: [],
+      minesLeft: 0,
+      time,
+      moves,
+    };
+    const field = document.getElementById('field');
+    const cells = Array.from(field.querySelectorAll('.cell'));
+
+    if (!cells.every((cell) => cell.textContent === '')) {
+      cells.forEach((cell) => {
+        if (cell.dataset.status === 'flag') {
+          savedFieldObj.minesLeft -= 1;
+        }
+        savedFieldObj.cells.push({
+          id: cell.id,
+          status: cell.dataset.status,
+          coord: cell.dataset.coord,
+          className: cell.className,
+          textContent: cell.textContent,
+        });
+      });
+    }
+    window.localStorage.setItem('saveGameObj', JSON.stringify(savedFieldObj));
   }
 }

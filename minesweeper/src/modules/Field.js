@@ -7,11 +7,11 @@ import Controls from './Controls';
 import { getTimeAndMoves } from './utils';
 
 export default class Field {
-  constructor(difficulty = 'medium', mines = 0, savedGame = []) {
+  constructor(difficulty = 'medium', mines = 0, savedGame = {}) {
     this.difficulty = difficulty;
     this.mines = this.getMinesCount(mines);
     this.size = this.getSizeFromDifficulty();
-    this.savedGame = savedGame;
+    this.savedField = savedGame.cells || [];
     this.isGameOver = false;
     this.isPause = false;
     window.addEventListener('timerPause', this.pauseTimer);
@@ -41,16 +41,52 @@ export default class Field {
 
   renderField = () => {
     const field = document.createElement('div');
+    this.field = field;
     field.className = `field field_${this.difficulty}`;
     field.id = 'field';
-    for (let i = 0; i < this.size * this.size; i += 1) {
-      const cell = Field.renderCell(i);
-      field.append(cell);
+    if (this.savedField.length === 0) {
+      for (let i = 0; i < this.size * this.size; i += 1) {
+        const cell = Field.renderCell(i);
+        field.append(cell);
+      }
+    } else {
+      this.renderFieldFromSave(field);
+      this.checkGameAvailable();
     }
-    this.field = field;
+
     field.addEventListener('click', this.fieldClickHandler);
     return field;
   };
+
+  renderFieldFromSave(field) {
+    this.savedField.forEach((cellInfo) => {
+      const cell = Field.renderCellFromSave(cellInfo);
+
+      this.getMinesArrayFromSave(cell);
+      field.append(cell);
+    });
+  }
+
+  getMinesArrayFromSave(cell) {
+    if (!this.minesArray) {
+      this.minesArray = [];
+    }
+    if (cell.textContent === 'B') {
+      this.minesArray.push(Number(cell.id));
+    }
+  }
+
+  static renderCellFromSave({
+    id, status, textContent, coord, className,
+  }) {
+    const cell = document.createElement('div');
+    cell.id = id;
+    cell.className = className;
+    cell.setAttribute('data-status', status);
+    cell.setAttribute('data-coord', coord);
+    cell.textContent = textContent;
+    return cell;
+  }
 
   static renderCell(index) {
     const cell = document.createElement('div');
@@ -80,7 +116,8 @@ export default class Field {
     ) {
       // Do nothing
       return undefined;
-    } else if (cell.textContent === 'B') {
+    }
+    if (cell.textContent === 'B') {
       // Game over
       cell.setAttribute('data-status', 'bomb');
       cell.classList.remove('mines-hidden');
@@ -145,9 +182,11 @@ export default class Field {
 
   handleFirstClick(cell) {
     this.firstCell = cell.id;
-    this.countAdjacentMines();
-    this.insertNumbers();
     this.startTimer();
+    if (this.savedField.length === 0) {
+      this.countAdjacentMines();
+      this.insertNumbers();
+    }
   }
 
   generateMinesArray() {
@@ -260,6 +299,20 @@ export default class Field {
       }
     };
     this.timerId = setInterval(tick, 1000);
+  }
+
+  checkGameAvailable() {
+    const hiddenCellsCount = this.field.querySelectorAll(
+      '.cell[data-status="hidden"]',
+    ).length;
+    const minesCount = this.minesArray.length;
+    const openedBombs = this.field.querySelectorAll(
+      '.cell[data-status="bomb"]',
+    ).length;
+
+    if (openedBombs === minesCount || hiddenCellsCount === minesCount) {
+      this.isGameOver = true;
+    }
   }
 
   checkWin() {
