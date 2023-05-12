@@ -135,7 +135,7 @@ export default class Field {
   generateMinesArray() {
     const minesArray = [];
     while (minesArray.length < this.mines) {
-      const randomPosition = Math.floor(Math.random() * (this.size ** 2 + 1));
+      const randomPosition = Math.floor(Math.random() * this.size ** 2);
       if (
         !minesArray.includes(randomPosition)
         && randomPosition !== Number(this.firstCell)
