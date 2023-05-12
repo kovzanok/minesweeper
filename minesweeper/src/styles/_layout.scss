@@ -9,3 +9,10 @@
   max-width: $content-width;
   margin: 0 auto;
 }
+
+.main-container {
+  display: flex;
+  justify-content: space-evenly;
+  padding-bottom: 10px;
+  column-gap: 10px;
+}

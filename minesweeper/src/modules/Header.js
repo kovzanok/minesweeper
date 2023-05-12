@@ -1,5 +1,4 @@
 import Container from './Container';
-import Controls from './Controls';
 import Infos from './Infos';
 
 export default class Header {
@@ -16,9 +15,7 @@ export default class Header {
     const infosInstance = new Infos(...this.value);
     const infos = infosInstance.renderInfos();
 
-    const controls = Controls.renderControls();
-
-    container.append(infos, controls);
+    container.append(infos);
 
     header.append(container);
     return header;
