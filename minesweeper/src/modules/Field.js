@@ -101,6 +101,17 @@ export default class Field {
       }
     }
   };
+
+  openBombMines() {
+    console.log(this.timerId);
+    clearInterval(this.timerId);
+    this.minesArray.forEach((mineId) => {
+      const bombCell = document.getElementById(mineId);
+      bombCell.dataset.status = 'bomb';
+      bombCell.classList.remove('mines-hidden');
+    });
+  }
+
   handleFirstClick(cell) {
     this.firstCell = cell.id;
     this.countAdjacentMines();
