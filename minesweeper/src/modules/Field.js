@@ -4,7 +4,7 @@ import loseSound from '../assets/mp3/lose.mp3';
 import MessageModal from './MessageModal';
 
 import Controls from './Controls';
-import { getTimeAndMoves } from './utils';
+import { getDifficultyFromFieldClass, getTimeAndMoves } from './utils';
 
 export default class Field {
   constructor(difficulty = 'medium', mines = 0, savedGame = {}) {
@@ -65,6 +65,22 @@ export default class Field {
       this.getMinesArrayFromSave(cell);
       field.append(cell);
     });
+  }
+
+  putResultToList() {
+    const [time, moves] = getTimeAndMoves();
+    const mines = this.minesArray.length;
+    const difficulty = getDifficultyFromFieldClass(this.field.className);
+    const saveToResultsEvent = new CustomEvent('saveToResults', {
+      detail: {
+        difficulty,
+        time,
+        moves,
+        mines,
+      },
+    });
+
+    window.dispatchEvent(saveToResultsEvent);
   }
 
   getMinesArrayFromSave(cell) {
@@ -335,6 +351,7 @@ export default class Field {
         moves,
       });
       document.body.append(modal);
+      this.putResultToList();
     }
   }
 }

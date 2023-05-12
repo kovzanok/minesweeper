@@ -12,7 +12,7 @@ export default class Game {
 
   start() {
     const headerInstance = new Header(
-      this.mines - this.savedGame.minesLeft,
+      this.mines - this.savedGame.minesLeft || 10,
       this.time,
       this.moves,
     );
@@ -22,6 +22,7 @@ export default class Game {
     document.body.append(main);
     window.addEventListener('restart', Game.restartGame);
     window.addEventListener('newGame', Game.startNewGame);
+    window.addEventListener('saveToResults', Game.saveToResults);
   }
 
   static restartGame(e) {
@@ -40,5 +41,23 @@ export default class Game {
     const header = headerInstance.renderHeader();
     const main = Main.renderMain(difficulty, mines);
     document.body.append(header, main);
+  }
+
+  static saveToResults(e) {
+    const savedResults = JSON.parse(
+      localStorage.getItem('savedResults') || '[]',
+    );
+    const {
+      time, mines, difficulty, moves,
+    } = e.detail;
+    console.log(savedResults);
+    if (savedResults.length >= 10) {
+      console.log('unshift');
+      savedResults.shift();
+    }
+    savedResults.push({
+      time, mines, difficulty, moves,
+    });
+    localStorage.setItem('savedResults', JSON.stringify(savedResults));
   }
 }
