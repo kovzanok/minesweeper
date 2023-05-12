@@ -54,6 +54,7 @@
   &[data-status="bomb"] {
     background-image: url("./assets/img/explosion.png");
     background-color: rgb(160, 18, 18);
+    color: transparent;
   }
 
   &[data-status="flag"] {
