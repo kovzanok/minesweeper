@@ -1,12 +1,24 @@
 .infos {
-  display: flex;
-  justify-content: space-around;
-  column-gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "a a"
+    "b c";
+  row-gap: 10px;
 }
 
 .info {
   text-align: center;
-  
+  &:first-child {
+    grid-area: a;
+  }
+  &:nth-child(2) {
+    grid-area: b;
+  }
+  &:nth-child(3) {
+    grid-area: c;
+  }
 }
 
 

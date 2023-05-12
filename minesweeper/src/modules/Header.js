@@ -3,8 +3,8 @@ import Controls from './Controls';
 import Infos from './Infos';
 
 export default class Header {
-  constructor(time = 0, moves = 0) {
-    this.value = [time, moves];
+  constructor(mines = 10, time = 0, moves = 0) {
+    this.value = [mines, time, moves];
   }
 
   renderHeader() {
