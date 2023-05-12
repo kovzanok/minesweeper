@@ -1,8 +1,8 @@
 .difficulty-block {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
 }
 
 .difficulty-list {
@@ -10,4 +10,8 @@
   list-style: none;
   padding: 0;
   column-gap: 20px;
+}
+
+.mines-input {
+  margin-left: 20px;
 }
