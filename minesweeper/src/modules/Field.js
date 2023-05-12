@@ -1,10 +1,12 @@
 import clickSound from '../assets/mp3/click.mp3';
 import winSound from '../assets/mp3/win.mp3';
 import loseSound from '../assets/mp3/lose.mp3';
+import flagSound from '../assets/mp3/flag.mp3';
 import MessageModal from './MessageModal';
 
 import Controls from './Controls';
 import { getDifficultyFromFieldClass, getTimeAndMoves } from './utils';
+import Infos from './Infos';
 
 export default class Field {
   constructor(difficulty = 'medium', mines = 0, savedGame = {}) {
@@ -126,20 +128,29 @@ export default class Field {
     }
     if (!this.firstCell) {
       this.handleFirstClick(cell);
-    } else if (
-      cell.dataset.status === 'opened'
-      || cell.dataset.status === 'flag'
-    ) {
+    }
+    if (Infos.isFlagMode && cell.dataset.status !== 'opened') {
+      if (cell.dataset.status === 'flag') {
+        cell.dataset.status = 'hidden';
+        Field.changeMinesLeftCount('+');
+      } else {
+        cell.dataset.status = 'flag';
+        Field.changeMinesLeftCount('-');
+      }
+      Field.addClick();
+      return undefined;
+    }
+    if (cell.dataset.status === 'opened' || cell.dataset.status === 'flag') {
       // Do nothing
       return undefined;
     }
     if (cell.textContent === 'B') {
       // Game over
+      Field.addClick();
       cell.setAttribute('data-status', 'bomb');
       cell.classList.remove('mines-hidden');
       this.isGameOver = true;
       this.openBombMines();
-      // alert('Вы проиграли');
       return undefined;
     }
     Field.addClick();
@@ -301,8 +312,13 @@ export default class Field {
     const currentMoves = Number(movesCounter.textContent);
     movesCounter.textContent = currentMoves + 1;
     if (!Controls.isMuted) {
-      const click = new Audio(clickSound);
-      click.play();
+      if (Infos.isFlagMode) {
+        const click = new Audio(flagSound);
+        click.play();
+      } else {
+        const click = new Audio(clickSound);
+        click.play();
+      }
     }
   }
 
@@ -331,14 +347,25 @@ export default class Field {
     }
   }
 
+  static changeMinesLeftCount(operation) {
+    const minesLeft = document.getElementById('mines-left');
+    if (operation === '+') {
+      minesLeft.textContent = Number(minesLeft.textContent) + 1;
+    } else {
+      minesLeft.textContent = Number(minesLeft.textContent) - 1;
+    }
+  }
+
   checkWin() {
     const hiddenCellsCount = this.field.querySelectorAll(
       '.cell[data-status="hidden"]',
     ).length;
+    const flaggedCellsCount = this.field.querySelectorAll(
+      '.cell[data-status="flag"]',
+    ).length;
     const minesCount = this.minesArray.length;
-    if (hiddenCellsCount === minesCount) {
+    if (hiddenCellsCount + flaggedCellsCount === minesCount) {
       this.isGameOver = true;
-      // alert('Вы победили');
       clearInterval(this.timerId);
       if (!Controls.isMuted) {
         const win = new Audio(winSound);

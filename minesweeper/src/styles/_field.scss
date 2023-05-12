@@ -61,6 +61,7 @@
     cursor: pointer;
     background-image: url("./assets/img/flag.png");
     background-color: $secondary-color;
+    color: transparent!important;
     @include media-hover {
       &:hover {
         border: 2px solid $primary-color;
@@ -128,6 +129,7 @@
 
     &[data-status="flag"] {
       background-color: $secondary-color-light;
+      color: transparent!important;
       @include media-hover {
         &:hover {
           border: 2px solid $primary-color-light;

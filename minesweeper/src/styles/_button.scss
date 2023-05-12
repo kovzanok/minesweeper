@@ -17,14 +17,27 @@ button {
     border-bottom: 3px solid $primary-color;
   }
 
-  &_new-game{
+  &_new-game {
     border: 1px solid $primary-color;
     width: 160px;
   }
 
-  &_back{
+  &_back {
     border: 1px solid $primary-color;
     width: 160px;
+  }
+
+  &_flag {
+    border: 1px solid $primary-color;
+    background-image: url("./assets/img/flag.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 55px;
+    height: 55px;
+  }
+
+  &_flag-active {
+    background-color: $primary-color;
   }
 
   @include media-hover {
@@ -50,14 +63,21 @@ button {
       border-bottom: 3px solid $primary-color-light;
     }
 
-    &_new-game{
+    &_new-game {
       border: 1px solid $primary-color-light;
-      
     }
 
-    &_back{
+    &_back {
       border: 1px solid $primary-color-light;
       width: 160px;
+    }
+
+    &_flag {
+      border: 1px solid $primary-color-light;
+    }
+
+    &_flag-active {
+      background-color: $primary-color-light;
     }
 
     @include media-hover {
@@ -65,7 +85,7 @@ button {
         color: rgb(229, 222, 222);
       }
     }
-    
+
     &:active {
       background-color: $primary-color-light;
       color: black;
