@@ -112,7 +112,7 @@
   .cell {
     border: 2px solid $secondary-color-light;
 
-    &[status="hidden"] {
+    &[data-status="hidden"] {
       cursor: pointer;
       background-color: $secondary-color-light;
       @include media-hover {
@@ -126,12 +126,12 @@
       }
     }
 
-    &[status="opened"] {
+    &[data-status="opened"] {
       background-color: $primary-color-light;
       border: 2px solid $primary-color-light;
     }
 
-    &[status="flag"] {
+    &[data-status="flag"] {
       background-color: $secondary-color-light;
       @include media-hover {
         &:hover {
