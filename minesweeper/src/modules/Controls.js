@@ -1,4 +1,4 @@
-import { capitalize } from './utils';
+import { capitalize, getDifficultyFromFieldClass } from './utils';
 import NewGameModal from './NewGameModal';
 
 export default class Controls {
@@ -13,6 +13,8 @@ export default class Controls {
         control.addEventListener('click', Controls.toggleTheme);
       } else if (buttonAction === 'new game') {
         control.addEventListener('click', Controls.displayNewGameModal);
+      } else if (buttonAction === 'restart') {
+        control.addEventListener('click', Controls.restartGame);
       }
       controls.append(control);
     });
@@ -42,5 +44,19 @@ export default class Controls {
     const gameModal = NewGameModal.render();
 
     document.body.append(gameModal);
+  }
+
+  static restartGame() {
+    const field = document.getElementById('field');
+    const difficulty = getDifficultyFromFieldClass(field.classList.toString());
+    const cells = Array.from(field.querySelectorAll('.cell'));
+    const mines = cells.reduce(
+      (sum, cell) => (cell.textContent === 'B' ? sum + 1 : sum + 0),
+      0,
+    ) || Number(document.getElementById('mines-left').textContent);
+    const restartGameEvent = new CustomEvent('restart', {
+      detail: [difficulty, mines],
+    });
+    window.dispatchEvent(restartGameEvent);
   }
 }

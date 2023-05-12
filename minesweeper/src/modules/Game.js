@@ -19,7 +19,14 @@ export default class Game {
     window.addEventListener('newGame', Game.startNewGame);
   }
 
-  static restartGame() {}
+  static restartGame(e) {
+    document.body.innerHTML = '';
+    const [difficulty, mines] = e.detail;
+    const headerInstance = new Header(mines, 0, 0);
+    const header = headerInstance.renderHeader();
+    const main = Main.renderMain(difficulty, mines);
+    document.body.append(header, main);
+  }
 
   static startNewGame(e) {
     document.body.innerHTML = '';

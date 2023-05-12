@@ -5,3 +5,9 @@ export function convertTextToId(text) {
 export function capitalize(str) {
   return str[0].toUpperCase() + str.slice(1);
 }
+
+export function getDifficultyFromFieldClass(fieldClassName) {
+  if (fieldClassName.includes('easy')) return 'easy';
+  if (fieldClassName.includes('medium')) return 'medium';
+  return 'hard';
+}
