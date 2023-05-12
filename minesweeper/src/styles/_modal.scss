@@ -12,8 +12,8 @@
 }
 
 .modal__body {
-  width: 35%;
-  height:240px;
+  width: 390px;
+
   border-radius: 5px;
   padding: 20px;
   background-color: $secondary-color;
@@ -44,6 +44,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .wrapper {
