@@ -204,4 +204,12 @@ export default class Field {
     const currentMoves = Number(movesCounter.textContent);
     movesCounter.textContent = currentMoves + 1;
   }
+  startTimer() {
+    const time = document.getElementById('time');
+    const tick = () => {
+      const timeValue = Number(time.textContent);
+      time.textContent = timeValue + 1;
+    };
+    this.timerId = setInterval(tick, 1000);
+  }
 }
