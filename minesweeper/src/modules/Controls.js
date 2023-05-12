@@ -89,10 +89,17 @@ export default class Controls {
     soundButton.textContent = `Sound: ${Controls.isMuted ? 'Off' : 'On'}`;
   }
 
-  static saveGame() {
+  static saveGame(e) {
+    const button = e.target;
     Controls.saveDifficulty();
     Controls.saveMines();
     Controls.saveField();
+    button.textContent = 'Saving';
+    button.disabled = true;
+    setTimeout(() => {
+      button.textContent = 'Save';
+      button.disabled = false;
+    }, 500);
   }
 
   static saveDifficulty() {
