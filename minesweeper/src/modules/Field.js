@@ -198,4 +198,10 @@ export default class Field {
     }
     return count;
   }
+
+  static addClick() {
+    const movesCounter = document.getElementById('moves');
+    const currentMoves = Number(movesCounter.textContent);
+    movesCounter.textContent = currentMoves + 1;
+  }
 }
