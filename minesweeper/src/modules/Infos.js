@@ -1,15 +1,15 @@
 import { convertTextToId } from './utils';
 
 export default class Infos {
-  constructor(mines, time, moves) {
-    this.values = [mines, time, moves];
+  constructor(time, moves) {
+    this.values = [time, moves];
   }
 
   renderInfos() {
     const infos = document.createElement('div');
     infos.className = 'infos';
 
-    const textArr = ['Mines left', 'Time', 'Moves'];
+    const textArr = ['Time', 'Moves'];
     textArr.forEach((text, index) => {
       const info = Infos.renderInfo(text, this.values[index]);
       infos.append(info);
