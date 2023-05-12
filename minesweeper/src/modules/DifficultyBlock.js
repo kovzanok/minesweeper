@@ -27,6 +27,7 @@ export default class DifficultyBlock {
       list.append(listItem);
     });
 
+    list.addEventListener('click', DifficultyBlock.changeDifficulties);
     return list;
   }
 
@@ -38,7 +39,7 @@ export default class DifficultyBlock {
     button.className = `button ${
       difficultyValue === this.difficulty ? 'button_active' : ''
     }`;
-    button.setAttribute('difficulty', difficultyValue);
+    button.setAttribute('data-difficulty', difficultyValue);
 
     button.textContent = capitalize(difficultyValue);
 
@@ -76,6 +77,15 @@ export default class DifficultyBlock {
     const input = e.target;
     if (Number(input.value) <= 0) {
       input.value = 1;
+    }
+  }
+
+  static changeDifficulties(e) {
+    if ((e.target.classList.contains('button'))) {
+      const list = e.target.closest('ul');
+      const activeButton = list.querySelector('.button_active');
+      activeButton.classList.remove('button_active');
+      e.target.classList.add('button_active');
     }
   }
 }
