@@ -11,11 +11,13 @@ export default class Header {
     header.className = 'header';
 
     const container = Container.renderContainer();
-
+    container.classList.add('header-container');
     const infosInstance = new Infos(...this.value);
     const infos = infosInstance.renderInfos();
 
-    container.append(infos);
+    const burger = Infos.renderMenuButton();
+
+    container.append(burger, infos);
 
     header.append(container);
     return header;

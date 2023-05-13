@@ -10,3 +10,22 @@
   grid-template-rows: repeat($size, 1fr);
   grid-gap: 5px;
 }
+
+
+@mixin media-content() {
+  @media (max-width: $content-width) {
+    @content;
+  }
+}
+
+@mixin media-controls() {
+  @media (max-width: $controls-hide-width) {
+    @content;
+  }
+}
+
+@mixin media-field() {
+  @media (max-width: $field-size-width) {
+    @content;
+  }
+}

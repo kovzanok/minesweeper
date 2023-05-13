@@ -62,4 +62,21 @@ export default class Infos {
     button.classList.toggle('button_flag-active');
     Infos.isFlagMode = !Infos.isFlagMode;
   }
+
+  static renderMenuButton() {
+    const button = document.createElement('button');
+    button.className = 'button button_menu';
+    button.textContent = 'Menu';
+    button.addEventListener('click', Infos.showMenu);
+    return button;
+  }
+
+  static showMenu() {
+    const background = Controls.renderBackground();
+    const mainContainer = document.querySelector('.main-container');
+    mainContainer.append(background);
+    document
+      .querySelector('.controls-wrapper')
+      .classList.add('controls-wrapper_active');
+  }
 }

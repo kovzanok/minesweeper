@@ -1,16 +1,15 @@
 .field {
   user-select: none;
-  display: flex;
-  flex-wrap: wrap;
   width: 70%;
   margin: auto;
-
-  height: 650px;
-  width: 650px;
+  height: 600px;
+  width: 600px;
 
   &_easy {
     @include field($size: 10);
     font-size: 4rem;
+    @include media-field {
+    }
   }
 
   &_medium {
@@ -20,8 +19,19 @@
 
   &_hard {
     @include field($size: 25);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    @include media-field {
+      height: 96%;
+      width: 96%;
+      font-size: 1rem;
+      row-gap: 2px;
+      column-gap: 5px;
+      .cell {
+        height: 18px;
+      }
+    }
   }
+
 }
 
 .cell {
@@ -61,7 +71,7 @@
     cursor: pointer;
     background-image: url("./assets/img/flag.png");
     background-color: $secondary-color;
-    color: transparent!important;
+    color: transparent !important;
     @include media-hover {
       &:hover {
         border: 2px solid $primary-color;
@@ -129,7 +139,7 @@
 
     &[data-status="flag"] {
       background-color: $secondary-color-light;
-      color: transparent!important;
+      color: transparent !important;
       @include media-hover {
         &:hover {
           border: 2px solid $primary-color-light;

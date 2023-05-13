@@ -8,8 +8,11 @@
   grid-template-areas:
     "a a a"
     "b d c";
-  row-gap: 10px;
+  row-gap: 5px;
   align-items: center;
+  @include media-controls {
+    margin-left: 0;
+  }
 }
 
 .info {
@@ -26,6 +29,9 @@
   &:nth-child(4) {
     grid-area: d;
   }
+  @include media-field {
+    font-size: 2.2rem;
+  }
 }
 
 .controls {
@@ -36,6 +42,44 @@
   flex-direction: column;
   row-gap: 10px;
   justify-content: start;
+}
+
+.controls-wrapper {
+  transition: all 0.4s ease;
+  @include media-controls {
+    position: absolute;
+    left: -100%;
+    z-index: 4;
+    padding: 10px;
+  }
+
+  &_active {
+    display: block;
+    left: 10%;
+  }
+  @include media-controls {
+    background-color: $secondary-color;
+    .light-theme {
+      background-color: $secondary-color-light;
+    }
+  }
+}
+
+.light-theme {
+  .controls-wrapper {
+    @include media-controls {
+      background-color: $secondary-color-light;
+    }
+  }
+}
+
+.background-controls {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: rgba($color: #000000, $alpha: 0.5);
 }
 
 .control {
@@ -63,7 +107,7 @@ button {
   button {
     &[data-action="toggle"] {
       background-image: url("./assets/img/fallout-nv.png");
-      
+
       color: transparent;
 
       @include media-hover {

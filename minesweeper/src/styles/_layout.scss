@@ -1,13 +1,14 @@
 .header {
-  padding-top: 15px;
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
 }
 
 .container {
   max-width: $content-width;
   margin: 0 auto;
+  @include media-content {
+    padding: 0 10px;
+  }
 }
 
 .main-container {
@@ -15,4 +16,14 @@
   justify-content: space-evenly;
   padding-bottom: 10px;
   column-gap: 10px;
+}
+
+.header-container {
+  @include media-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    column-gap: 5%;
+  }
 }

@@ -34,10 +34,23 @@ button {
     background-size: contain;
     width: 55px;
     height: 55px;
+    @include media-field {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   &_flag-active {
     background-color: $primary-color;
+  }
+
+  &_menu {
+    border: 1px solid $primary-color;
+    width: 120px;
+    display: none;
+    @include media-controls {
+      display: block;
+    }
   }
 
   @include media-hover {
@@ -49,6 +62,9 @@ button {
   &:active {
     background-color: $primary-color;
     color: black;
+  }
+  &[data-action="toggle"] {
+    color: transparent;
   }
 }
 
@@ -89,6 +105,14 @@ button {
     &:active {
       background-color: $primary-color-light;
       color: black;
+    }
+
+    &[data-action="toggle"] {
+      color: transparent;
+    }
+
+    &_menu {
+      border: 1px solid $primary-color-light;
     }
   }
 }

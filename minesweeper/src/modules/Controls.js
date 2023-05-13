@@ -9,7 +9,23 @@ import ResultsModal from './ResultsModal';
 export default class Controls {
   static isMuted = false;
 
+  static renderBackground() {
+    const background = document.createElement('div');
+    background.className = 'background-controls';
+    background.addEventListener('click', Controls.hidemenu);
+    return background;
+  }
+
+  static hidemenu(e) {
+    document
+      .querySelector('.controls-wrapper')
+      .classList.remove('controls-wrapper_active');
+    e.target.remove();
+  }
+
   static renderControls() {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'controls-wrapper';
     const controls = document.createElement('ul');
     controls.className = 'controls';
     const buttonArr = [
@@ -38,8 +54,8 @@ export default class Controls {
       }
       controls.append(control);
     });
-
-    return controls;
+    wrapper.append(controls);
+    return wrapper;
   }
 
   static renderControl(action) {

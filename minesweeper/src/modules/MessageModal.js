@@ -17,20 +17,20 @@ export default class MessageModal extends Modal {
     const { win } = innerInfo;
     if (win) {
       const heading = document.createElement('h2');
-      heading.textContent = 'You won!';
+      heading.textContent = `Hooray! You found all mines in ${innerInfo.time} seconds and ${innerInfo.moves} moves!`;
 
-      const wrapper = document.createElement('div');
-      wrapper.className = 'wrapper';
-      const timeSpan = document.createElement('span');
-      timeSpan.textContent = `Time: ${innerInfo.time}s`;
+      // const wrapper = document.createElement('div');
+      // wrapper.className = 'wrapper';
+      // const timeSpan = document.createElement('span');
+      // timeSpan.textContent = `Time: ${innerInfo.time}s`;
 
-      const movesSpan = document.createElement('span');
-      movesSpan.textContent = `Moves: ${innerInfo.moves}`;
-      wrapper.append(timeSpan, movesSpan);
-      content.append(heading, wrapper);
+      // const movesSpan = document.createElement('span');
+      // movesSpan.textContent = `Moves: ${innerInfo.moves}`;
+      // wrapper.append(timeSpan, movesSpan);
+      content.append(heading);
     } else {
       const heading = document.createElement('h2');
-      heading.textContent = 'Your life ends in a wasteland...';
+      heading.textContent = 'Your life ends in a wasteland... Game over. Try again';
       content.append(heading);
     }
     return content;
