@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 
 const config = {
   entry: path.resolve(__dirname, "src", "index.js"),
@@ -19,8 +20,11 @@ const config = {
       filename: "[name].css",
     }),
     new ESLintPlugin({
-      fix: true
+      fix: true,
     }),
+    new FaviconsWebpackPlugin(
+      path.resolve(__dirname, "src", "assets", "img", "favicon.ico")
+    ),
   ],
   module: {
     rules: [
@@ -35,11 +39,11 @@ const config = {
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource',
+        type: "asset/resource",
       },
       {
         test: /\.(mp3)$/i,
-        type: 'asset/resource',
+        type: "asset/resource",
       },
     ],
   },
