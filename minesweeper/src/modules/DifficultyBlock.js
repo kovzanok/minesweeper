@@ -52,7 +52,7 @@ export default class DifficultyBlock {
     input.className = 'mines-input';
     input.id = 'mines';
     input.type = 'number';
-    input.min = 1;
+    input.min = 10;
     input.max = 99;
     input.value = 10;
 
@@ -76,7 +76,7 @@ export default class DifficultyBlock {
   static insertMinValue(e) {
     const input = e.target;
     if (Number(input.value) <= 0) {
-      input.value = 1;
+      input.value = 10;
     }
   }
 
