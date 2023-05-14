@@ -12,7 +12,7 @@ export default class Game {
   }
 
   static countFlags(cells) {
-    if (cells.length === 0) {
+    if (!cells || cells.length === 0) {
       return 0;
     }
     const flagsCount = cells.reduce((flags, cell) => {
