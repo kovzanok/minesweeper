@@ -342,12 +342,15 @@ export default class Field {
     const hiddenCellsCount = this.field.querySelectorAll(
       '.cell[data-status="hidden"]',
     ).length;
+    const flaggedCellsCount = this.field.querySelectorAll(
+      '.cell[data-status="flag"]',
+    ).length;
     const minesCount = this.minesArray.length;
     const openedBombs = this.field.querySelectorAll(
       '.cell[data-status="bomb"]',
     ).length;
 
-    if (openedBombs === minesCount || hiddenCellsCount === minesCount) {
+    if (openedBombs === minesCount || hiddenCellsCount + flaggedCellsCount === minesCount) {
       this.isGameOver = true;
     }
   }
@@ -378,6 +381,7 @@ export default class Field {
       '.cell[data-status="flag"]',
     ).length;
     const minesCount = this.minesArray.length;
+
     if (hiddenCellsCount + flaggedCellsCount === minesCount) {
       this.isGameOver = true;
       clearInterval(this.timerId);
