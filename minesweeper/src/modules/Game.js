@@ -8,6 +8,18 @@ export default class Game {
     this.savedGame = savedGame;
     this.time = savedGame.time;
     this.moves = savedGame.moves;
+    this.flags = Game.countFlags(savedGame.cells);
+  }
+
+  static countFlags(cells) {
+    if (cells.length === 0) {
+      return 0;
+    }
+    const flagsCount = cells.reduce((flags, cell) => {
+      if (cell.status === 'flag') return flags + 1;
+      return flags;
+    }, 0);
+    return flagsCount;
   }
 
   start() {
@@ -15,6 +27,7 @@ export default class Game {
       Number(this.mines) - this.savedGame.minesLeft || 10,
       this.time,
       this.moves,
+      this.flags,
     );
     const header = headerInstance.renderHeader();
     document.body.append(header);

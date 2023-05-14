@@ -133,9 +133,11 @@ export default class Field {
       if (cell.dataset.status === 'flag') {
         cell.dataset.status = 'hidden';
         Field.changeMinesLeftCount('+');
+        Field.changeFlagsCount('-');
       } else {
         cell.dataset.status = 'flag';
         Field.changeMinesLeftCount('-');
+        Field.changeFlagsCount('+');
       }
       Field.addClick();
       return undefined;
@@ -308,9 +310,12 @@ export default class Field {
   }
 
   static addClick() {
-    const movesCounter = document.getElementById('moves');
-    const currentMoves = Number(movesCounter.textContent);
-    movesCounter.textContent = currentMoves + 1;
+    if (!Infos.isFlagMode) {
+      const movesCounter = document.getElementById('moves');
+      const currentMoves = Number(movesCounter.textContent);
+      movesCounter.textContent = currentMoves + 1;
+    }
+
     if (!Controls.isMuted) {
       if (Infos.isFlagMode) {
         const click = new Audio(flagSound);
@@ -353,6 +358,15 @@ export default class Field {
       minesLeft.textContent = Number(minesLeft.textContent) + 1;
     } else {
       minesLeft.textContent = Number(minesLeft.textContent) - 1;
+    }
+  }
+
+  static changeFlagsCount(operation) {
+    const flags = document.getElementById('flags');
+    if (operation === '+') {
+      flags.textContent = Number(flags.textContent) + 1;
+    } else {
+      flags.textContent = Number(flags.textContent) - 1;
     }
   }
 

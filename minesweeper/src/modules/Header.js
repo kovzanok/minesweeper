@@ -2,8 +2,8 @@ import Container from './Container';
 import Infos from './Infos';
 
 export default class Header {
-  constructor(mines = 10, time = 0, moves = 0) {
-    this.value = [mines, time, moves];
+  constructor(mines = 10, time = 0, moves = 0, flags = 0) {
+    this.value = [mines, time, moves, flags];
   }
 
   renderHeader() {

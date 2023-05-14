@@ -5,8 +5,8 @@ import Controls from './Controls';
 export default class Infos {
   static isFlagMode = false;
 
-  constructor(mines, time, moves) {
-    this.values = [mines, time, moves];
+  constructor(mines, time, moves, flags = 0) {
+    this.values = [mines, time, moves, flags];
   }
 
   renderInfos() {
@@ -14,7 +14,7 @@ export default class Infos {
     const infos = document.createElement('div');
     infos.className = 'infos';
 
-    const textArr = ['Mines left', 'Time', 'Moves', 'Flag'];
+    const textArr = ['Mines left', 'Time', 'Moves', 'Flags', 'Flag'];
     textArr.forEach((text, index) => {
       const info = Infos.renderInfo(text, this.values[index]);
       infos.append(info);

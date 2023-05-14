@@ -6,8 +6,8 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas:
-    "a a a"
-    "b d c";
+    "a a d "
+    "b e c";
   row-gap: 5px;
   align-items: center;
   @include media-controls {
@@ -28,6 +28,9 @@
   }
   &:nth-child(4) {
     grid-area: d;
+  }
+  &:nth-child(5) {
+    grid-area: e;
   }
   @include media-field {
     font-size: 2.2rem;
