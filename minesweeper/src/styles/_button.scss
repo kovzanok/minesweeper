@@ -29,7 +29,7 @@ button {
 
   &_flag {
     border: 1px solid $primary-color;
-    background-image: url("./assets/img/flag.png");
+    background-image: url("./assets/img/explosion.png");
     background-repeat: no-repeat;
     background-size: contain;
     width: 55px;
@@ -41,7 +41,8 @@ button {
   }
 
   &_flag-active {
-    background-color: $primary-color;
+    background-image: url("./assets/img/flag.png");
+    
   }
 
   &_menu {
