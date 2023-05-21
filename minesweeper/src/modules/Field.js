@@ -13,8 +13,6 @@ export default class Field {
     this.difficulty = difficulty;
     this.mines = this.getMinesCount(mines);
     this.size = this.getSizeFromDifficulty();
-    console.log(this.size);
-    console.log(this.difficulty);
     this.savedField = savedGame.cells || [];
     this.isGameOver = false;
     this.isPause = false;
