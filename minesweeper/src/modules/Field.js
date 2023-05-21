@@ -9,10 +9,12 @@ import { getDifficultyFromFieldClass, getTimeAndMoves } from './utils';
 import Infos from './Infos';
 
 export default class Field {
-  constructor(difficulty = 'medium', mines = 0, savedGame = {}) {
+  constructor(difficulty = 'easy', mines = 0, savedGame = {}) {
     this.difficulty = difficulty;
     this.mines = this.getMinesCount(mines);
     this.size = this.getSizeFromDifficulty();
+    console.log(this.size);
+    console.log(this.difficulty);
     this.savedField = savedGame.cells || [];
     this.isGameOver = false;
     this.isPause = false;

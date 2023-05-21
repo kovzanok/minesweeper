@@ -3,7 +3,7 @@ import Game from './Game';
 export default class App {
   constructor() {
     this.mines = App.getMinesCount() || 10;
-    this.difficulty = App.getDifficulty() || 'medium';
+    this.difficulty = App.getDifficulty() || 'easy';
     this.savedGame = App.getGameFromLocalStorage();
   }
 
