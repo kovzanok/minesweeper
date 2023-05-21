@@ -75,7 +75,7 @@ export default class DifficultyBlock {
 
   static insertMinValue(e) {
     const input = e.target;
-    if (Number(input.value) <= 0) {
+    if (Number(input.value) <= 9) {
       input.value = 10;
     }
   }
