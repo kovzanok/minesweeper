@@ -13,6 +13,7 @@
   @include media-controls {
     margin-left: 0;
   }
+  
 }
 
 .info {
@@ -34,6 +35,9 @@
   }
   @include media-field {
     font-size: 2.2rem;
+  }
+  @include media-field-mobile {
+    font-size: 1.7rem;
   }
 }
 
